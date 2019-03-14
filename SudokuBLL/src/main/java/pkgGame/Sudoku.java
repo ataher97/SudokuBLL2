@@ -38,17 +38,29 @@ public class Sudoku extends LatinSquare {
 	}
 
 	protected int[] getRegion(int iCol, int iRow) {
-		int iRegionNbr = (iCol % iSqrtSize) + ((iRow % iSqrtSize) * iSqrtSize);
+		int iRegionNbr = (iCol / iSqrtSize) + ((iRow / iSqrtSize) * iSqrtSize);
 		return getRegion(iRegionNbr);
 	}
 
 	protected boolean isSudoku() {
 		setbIgnoreZero(false);
-		boolean isSudoku = false;
+		boolean isSudoku = true;
 
-		if (isPartialSudoku() && !ContainsZero()) { // Will this work with how isPartialSudoku() is implemented?
-			isSudoku = true;
+		if(hasDuplicates()) {
+			isSudoku = false;
 		}
+		
+		if(!ContainsZero()) {
+			isSudoku = false;
+		}
+		
+		for(int i = 0; i < iSize; i++) {
+			if(hasAllValues(getRegion(i),getRow(0))) {
+				isSudoku = false;
+				break;
+			}
+		}
+		
 		return isSudoku;
 	}
 
@@ -56,19 +68,11 @@ public class Sudoku extends LatinSquare {
 		setbIgnoreZero(true);
 		boolean isPartialSudoku = true;
 
-		if (!isLatinSquare()) {
-			isPartialSudoku = false;
-		}
 		if(hasDuplicates()) {
 			isPartialSudoku = false;
 		}
-		for(int i = 0; i < iSize; i++) { // Is this right?-------------------
-			if(hasAllValues(getRegion(i),getRow(0))) {
-				isPartialSudoku = false;
-				break;
-			}
-		}
-		if(!ContainsZero()) { // How can this be used with isSudoku()?---------
+
+		if(!ContainsZero()) {
 			isPartialSudoku = false;
 		}
 
@@ -77,7 +81,8 @@ public class Sudoku extends LatinSquare {
 
 	protected boolean isValueValid(int iValue, int iCol, int iRow) {
 		boolean isValueValid = true;
-
+			
+			
 		
 
 		return isValueValid;
