@@ -52,7 +52,6 @@ public class LatinSquare {
 			}
 		}
 		return false;
-
 	}
 
 	/**
@@ -233,11 +232,13 @@ public class LatinSquare {
 		// false;
 		for (int i = 0; i < LatinSquare.length; i++) {
 			if (hasDuplicates(getRow(i)))
+				AddPuzzleViolation​("DupRow");
 				return false;
 		}
 
 		for (int j = 0; j < LatinSquare.length; j++) {
 			if (hasDuplicates(getColumn(j)))
+				AddPuzzleViolation​("DupCol");
 				return false;
 		}
 
