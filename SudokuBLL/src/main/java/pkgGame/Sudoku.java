@@ -86,12 +86,12 @@ public class Sudoku extends LatinSquare {
 		boolean isValueValid = true;
 
 		if (doesElementExist(getRow(iRow), iValue)) {
-			//AddPuzzleViolation​(new PuzzleViolation(ePuzzleViolation.DupRow, iRow));
+			AddPuzzleViolation​(new PuzzleViolation(ePuzzleViolation.DupRow, iRow));
 			isValueValid = false;
 		}
 
 		if (doesElementExist(getColumn(iCol), iValue)) {
-			//AddPuzzleViolation​(new PuzzleViolation(ePuzzleViolation.DupCol, iCol));
+			// AddPuzzleViolation​(new PuzzleViolation(ePuzzleViolation.DupCol, iCol));
 			isValueValid = false;
 		}
 

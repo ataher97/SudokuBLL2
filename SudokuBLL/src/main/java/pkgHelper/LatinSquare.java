@@ -14,7 +14,7 @@ public class LatinSquare {
 	 */
 	private int[][] LatinSquare;
 	private boolean bIgnoreZero;
-	private java.util.ArrayList<PuzzleViolation> PV;
+	protected java.util.ArrayList<PuzzleViolation> PV;
 
 	/**
 	 * No-arg constructor, make it public, don't do anything in the constructor
