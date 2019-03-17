@@ -121,4 +121,13 @@ public class LatinSquareTest {
 		
 		assertFalse(LS.isLatinSquare());
 	}
+	
+	@Test
+	public void RemoveZeros_Test1() {
+		LatinSquare LS = new LatinSquare();
+		int[] arr1 = { 1, 0, 2, 3, 4, 5, 6, 7, 0, 8, 9 };
+		int[] arr2 = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+		
+		//assertTrue(Arrays.equals(LS.RemoveZeros​(arr1), arr2));
+	}
 }

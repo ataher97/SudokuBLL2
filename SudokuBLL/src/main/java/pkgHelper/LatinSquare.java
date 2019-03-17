@@ -1,6 +1,8 @@
 package pkgHelper;
 
 import java.util.Arrays;
+import pkgEnum.ePuzzleViolation;
+import pkgHelper.PuzzleViolation;
 
 public class LatinSquare {
 
@@ -231,15 +233,17 @@ public class LatinSquare {
 		// Check to see if the any row or column has duplicates. If they do, return
 		// false;
 		for (int i = 0; i < LatinSquare.length; i++) {
-			if (hasDuplicates(getRow(i)))
-				AddPuzzleViolation​("DupRow");
+			if (hasDuplicates(getRow(i))) {
+				AddPuzzleViolation​(new PuzzleViolation(ePuzzleViolation.DupRow, i));
 				return false;
+			}
 		}
 
 		for (int j = 0; j < LatinSquare.length; j++) {
-			if (hasDuplicates(getColumn(j)))
-				AddPuzzleViolation​("DupCol");
+			if (hasDuplicates(getColumn(j))) {
+				AddPuzzleViolation​(new PuzzleViolation(ePuzzleViolation.DupCol, j));
 				return false;
+			}
 		}
 
 		for (int i = 1; i < LatinSquare.length; i++) {
@@ -303,9 +307,10 @@ public class LatinSquare {
 
 		int index = 0;
 		for (int i = 0; i < arr.length; i++) {
-			if (arr[i] != 0)
+			if (arr[i] != 0) {
 				newArray[index] = arr[i];
-			index++;
+				index++;
+			}
 		}
 		return newArray;
 	}

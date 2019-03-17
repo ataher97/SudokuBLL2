@@ -1,8 +1,9 @@
 package pkgGame;
 
 import java.util.Arrays;
-
+import pkgEnum.ePuzzleViolation;
 import pkgHelper.LatinSquare;
+import pkgHelper.PuzzleViolation;
 
 public class Sudoku extends LatinSquare {
 
@@ -51,12 +52,12 @@ public class Sudoku extends LatinSquare {
 		}
 
 		if (ContainsZero()) {
-			AddPuzzleViolation​("ContainsZero");
+			// AddPuzzleViolation​(new PuzzleViolation(ePuzzleViolation.ContainsZero, i));
 			isSudoku = false;
 		}
 
 		for (int i = 0; i < iSize; i++) {
-			if (hasAllValues(getRegion(i), getRow(0))) {
+			if (!hasAllValues(getRegion(i), getRow(0))) {
 				isSudoku = false;
 				break;
 			}
@@ -74,7 +75,7 @@ public class Sudoku extends LatinSquare {
 		}
 
 		if (!ContainsZero()) {
-			AddPuzzleViolation​("MissingZero");
+			// AddPuzzleViolation​(new PuzzleViolation(ePuzzleViolation.MissingZero, i));
 			isPartialSudoku = false;
 		}
 
@@ -83,26 +84,26 @@ public class Sudoku extends LatinSquare {
 
 	protected boolean isValueValid(int iValue, int iCol, int iRow) {
 		boolean isValueValid = true;
-		
-		if (doesElementExist(getRow(iRow),iValue)){
-			AddPuzzleViolation​("DupRow");
+
+		if (doesElementExist(getRow(iRow), iValue)) {
+			//AddPuzzleViolation​(new PuzzleViolation(ePuzzleViolation.DupRow, iRow));
 			isValueValid = false;
 		}
-		
-		if(doesElementExist(getColumn(iCol),iValue)){
-			AddPuzzleViolation​("DupCol");
+
+		if (doesElementExist(getColumn(iCol), iValue)) {
+			//AddPuzzleViolation​(new PuzzleViolation(ePuzzleViolation.DupCol, iCol));
 			isValueValid = false;
 		}
-		
-		if(doesElementExist(getRegion(iCol,iRow),iValue)){
-			AddPuzzleViolation​("DupRegion");
+
+		if (doesElementExist(getRegion(iCol, iRow), iValue)) {
+			// AddPuzzleViolation​(new PuzzleViolation(ePuzzleViolation.DupRow, i));
 			isValueValid = false;
 		}
-		
-		if(!isValueValid) {
-			AddPuzzleViolation​("InvalidValue");
+
+		if (!isValueValid) {
+			// AddPuzzleViolation​(new PuzzleViolation(ePuzzleViolation.InvalidValue, i));
 		}
-		
+
 		return isValueValid;
 	}
 
@@ -110,10 +111,12 @@ public class Sudoku extends LatinSquare {
 	public boolean hasDuplicates() {
 		boolean hasDuplicates = false;
 
-		if (!super.hasDuplicates()) {
+		if (super.hasDuplicates()) {
+			hasDuplicates = true;
+		} else {
 			for (int i = 0; i < iSize; i++) {
 				if (hasDuplicates(getRegion(i))) {
-					AddPuzzleViolation​("DupRegion");
+					// AddPuzzleViolation​(new PuzzleViolation(ePuzzleViolation.DupRegion, i));
 					hasDuplicates = true;
 					break;
 				}
@@ -121,5 +124,4 @@ public class Sudoku extends LatinSquare {
 		}
 		return hasDuplicates;
 	}
-
 }
