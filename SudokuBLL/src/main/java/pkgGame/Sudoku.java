@@ -7,22 +7,41 @@ import pkgHelper.PuzzleViolation;
 
 public class Sudoku extends LatinSquare {
 
-	private int iSize = getPuzzle().length;
-	private int iSqrtSize = (int) Math.sqrt(iSize);
+	private int iSize;
+	private int iSqrtSize;
 
 	public Sudoku() {
 		super();
 	}
 
-	public Sudoku(int[][] latinSquare) {
+	public Sudoku(int iSize) throws Exception {
+		if ((int) Math.sqrt(iSize) != Math.sqrt(iSize)) {
+			throw new Exception("Invalid Size");
+		} else {
+			this.iSize = iSize;
+			this.iSqrtSize = (int) Math.sqrt(iSize);
+		}
+	}
+
+	public Sudoku(int[][] latinSquare) throws Exception {
 		super(latinSquare);
+		if ((int) Math.sqrt(latinSquare.length) != Math.sqrt(latinSquare.length)) {
+			throw new Exception("Invalid Size");
+		} else {
+			this.iSize = latinSquare.length;
+			this.iSqrtSize = (int) Math.sqrt(latinSquare.length);
+		}
 	}
 
 	protected int[][] getPuzzle() {
 		return super.getLatinSquare();
 	}
 
-	protected int[] getRegion(int iRegionNbr) {
+	protected int[] getRegion(int iRegionNbr) throws Exception {
+
+		if ((iRegionNbr + 1 > iSize)) {
+			throw new Exception("Bad Region Call");
+		}
 
 		int columnStart = iRegionNbr % iSqrtSize * iSqrtSize;
 		int rowStart = iRegionNbr / iSqrtSize * iSqrtSize;
@@ -38,12 +57,12 @@ public class Sudoku extends LatinSquare {
 		return region;
 	}
 
-	protected int[] getRegion(int iCol, int iRow) {
+	protected int[] getRegion(int iCol, int iRow) throws Exception {
 		int iRegionNbr = (iCol / iSqrtSize) + ((iRow / iSqrtSize) * iSqrtSize);
 		return getRegion(iRegionNbr);
 	}
 
-	protected boolean isSudoku() {
+	protected boolean isSudoku() throws Exception {
 		setbIgnoreZero(false);
 		boolean isSudoku = true;
 
@@ -52,7 +71,7 @@ public class Sudoku extends LatinSquare {
 		}
 
 		if (ContainsZero()) {
-			//AddPuzzleViolation​(new PuzzleViolation(ePuzzleViolation.ContainsZero, i));
+			AddPuzzleViolation​(new PuzzleViolation(ePuzzleViolation.ContainsZero, 0));
 			isSudoku = false;
 		}
 
@@ -66,7 +85,7 @@ public class Sudoku extends LatinSquare {
 		return isSudoku;
 	}
 
-	protected boolean isPartialSudoku() {
+	protected boolean isPartialSudoku() throws Exception {
 		setbIgnoreZero(true);
 		boolean isPartialSudoku = true;
 
@@ -75,14 +94,14 @@ public class Sudoku extends LatinSquare {
 		}
 
 		if (!ContainsZero()) {
-			// AddPuzzleViolation​(new PuzzleViolation(ePuzzleViolation.MissingZero, i));
+			AddPuzzleViolation​(new PuzzleViolation(ePuzzleViolation.MissingZero, 0));
 			isPartialSudoku = false;
 		}
 
 		return isPartialSudoku;
 	}
 
-	protected boolean isValueValid(int iValue, int iCol, int iRow) {
+	protected boolean isValueValid(int iValue, int iCol, int iRow) throws Exception {
 		boolean isValueValid = true;
 
 		if (doesElementExist(getRow(iRow), iValue)) {
@@ -96,19 +115,19 @@ public class Sudoku extends LatinSquare {
 		}
 
 		if (doesElementExist(getRegion(iCol, iRow), iValue)) {
-			// AddPuzzleViolation​(new PuzzleViolation(ePuzzleViolation.DupRow, i));
+			AddPuzzleViolation​(new PuzzleViolation(ePuzzleViolation.DupRegion, 0));
 			isValueValid = false;
 		}
 
 		if (!isValueValid) {
-			// AddPuzzleViolation​(new PuzzleViolation(ePuzzleViolation.InvalidValue, i));
+			AddPuzzleViolation​(new PuzzleViolation(ePuzzleViolation.InvalidValue, 0));
 		}
 
 		return isValueValid;
 	}
 
 	@Override
-	public boolean hasDuplicates() {
+	public boolean hasDuplicates() throws Exception {
 		boolean hasDuplicates = false;
 
 		if (super.hasDuplicates()) {

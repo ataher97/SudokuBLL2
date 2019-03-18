@@ -2,7 +2,10 @@ package pkgHelper;
 
 import static org.junit.Assert.*;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -78,54 +81,56 @@ public class LatinSquareTest {
 
 	@Test
 	public void getColumn_Test1() {
-		
+
 		int[][] MySquare = { { 1, 2, 3 }, { 3, 1, 2 }, { 2, 3, 1 } };
 
 		LatinSquare LS = new LatinSquare(MySquare);
-		int [] ExpectedCol = {2,1,3};
-		int [] Col = LS.getColumn(1);
-		
+		int[] ExpectedCol = { 2, 1, 3 };
+		int[] Col = LS.getColumn(1);
+
 		assertTrue(Arrays.equals(ExpectedCol, Col));
 	}
-	
+
 	@Test
 	public void getRow_Test1() {
-		
+
 		int[][] MySquare = { { 1, 2, 3 }, { 3, 1, 2 }, { 2, 3, 1 } };
 
 		LatinSquare LS = new LatinSquare(MySquare);
-		int [] ExpectedRow = {3,1,2};
-		int [] Row = LS.getRow(1);
-		
+		int[] ExpectedRow = { 3, 1, 2 };
+		int[] Row = LS.getRow(1);
+
 		assertTrue(Arrays.equals(ExpectedRow, Row));
 	}
-	
+
 	@Test
 	public void isLatinSquare_Test1() {
-		
+
 		int[][] MySquare = { { 1, 2, 3 }, { 3, 1, 2 }, { 2, 3, 1 } };
 
 		LatinSquare LS = new LatinSquare(MySquare);
-		
+
 		assertTrue(LS.isLatinSquare());
 	}
-	
+
 	@Test
 	public void isLatinSquare_Test2() {
-		
+
 		int[][] MySquare = { { 1, 2, 3 }, { 3, 1, 2 }, { 4, 5, 6 } };
 
 		LatinSquare LS = new LatinSquare(MySquare);
-		
+
 		assertFalse(LS.isLatinSquare());
 	}
-	
+
 	@Test
 	public void RemoveZeros_Test1() {
+
 		LatinSquare LS = new LatinSquare();
+
 		int[] arr1 = { 1, 0, 2, 3, 4, 5, 6, 7, 0, 8, 9 };
 		int[] arr2 = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-		
-		//assertTrue(Arrays.equals(LS.RemoveZeros​(arr1), arr2));
+
+		// assertTrue(Arrays.equals(LS.RemoveZeros​(arr1), arr2));
 	}
 }

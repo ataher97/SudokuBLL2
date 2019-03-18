@@ -122,7 +122,7 @@ public class LatinSquare {
 		return LatinSquare;
 	}
 
-	public java.util.ArrayList<PuzzleViolation> getPV() {
+	public ArrayList<PuzzleViolation> getPV() {
 		return PV;
 	}
 
@@ -280,7 +280,7 @@ public class LatinSquare {
 		this.bIgnoreZero = bIgnoreZero;
 	}
 
-	protected boolean hasDuplicates() {
+	protected boolean hasDuplicates() throws Exception {
 		boolean hasDuplicates = false;
 
 		for (int i = 0; i < LatinSquare.length; i++) {
