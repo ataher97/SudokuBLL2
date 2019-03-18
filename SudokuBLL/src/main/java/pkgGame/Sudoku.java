@@ -52,7 +52,7 @@ public class Sudoku extends LatinSquare {
 		}
 
 		if (ContainsZero()) {
-			// AddPuzzleViolation​(new PuzzleViolation(ePuzzleViolation.ContainsZero, i));
+			//AddPuzzleViolation​(new PuzzleViolation(ePuzzleViolation.ContainsZero, i));
 			isSudoku = false;
 		}
 
@@ -91,7 +91,7 @@ public class Sudoku extends LatinSquare {
 		}
 
 		if (doesElementExist(getColumn(iCol), iValue)) {
-			// AddPuzzleViolation​(new PuzzleViolation(ePuzzleViolation.DupCol, iCol));
+			AddPuzzleViolation​(new PuzzleViolation(ePuzzleViolation.DupCol, iCol));
 			isValueValid = false;
 		}
 
@@ -116,7 +116,7 @@ public class Sudoku extends LatinSquare {
 		} else {
 			for (int i = 0; i < iSize; i++) {
 				if (hasDuplicates(getRegion(i))) {
-					// AddPuzzleViolation​(new PuzzleViolation(ePuzzleViolation.DupRegion, i));
+					AddPuzzleViolation​(new PuzzleViolation(ePuzzleViolation.DupRegion, i));
 					hasDuplicates = true;
 					break;
 				}

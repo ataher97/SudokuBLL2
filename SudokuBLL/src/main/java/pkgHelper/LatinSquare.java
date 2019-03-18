@@ -1,5 +1,6 @@
 package pkgHelper;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import pkgEnum.ePuzzleViolation;
 import pkgHelper.PuzzleViolation;
@@ -14,7 +15,7 @@ public class LatinSquare {
 	 */
 	private int[][] LatinSquare;
 	private boolean bIgnoreZero;
-	protected java.util.ArrayList<PuzzleViolation> PV;
+	protected ArrayList<PuzzleViolation> PV = new ArrayList<PuzzleViolation>();
 
 	/**
 	 * No-arg constructor, make it public, don't do anything in the constructor
